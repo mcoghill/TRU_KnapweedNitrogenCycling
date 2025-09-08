@@ -45,10 +45,12 @@ soil_cn_plot <- ggplot(df_soil, aes(x = treatment, y = nitrogen, fill = treatmen
   facet_grid(. ~ title) +
   theme_bw(base_size = 14, base_family = font_style) +
   scale_fill_manual(values = plot_colors) +
-  labs(y = "Nitrogen content (%)", x = "Treatment") +
+  labs(y = "Nitrogen content (%)") +
   theme(axis.text.x = ggtext::element_markdown(color = "black", angle = 22.5, hjust = 1, vjust = 1),
         axis.text.y = element_text(color = "black"),
-        axis.title = element_text(color = "black", face = "bold", ),
+        axis.title = element_text(color = "black", face = "bold"),
+        axis.title.x = element_blank(),
+        strip.text = element_text(color = "black", face = "bold"),
         panel.grid = element_blank())
 
 soil_cn_plot
@@ -92,14 +94,16 @@ plant_cn_plot <- ggplot(df_plant_cn, aes(x = plant_type, y = mean_n, fill = plan
   ) +
   facet_grid(. ~ title) +
   theme_bw(base_size = 14, base_family = font_style) +
-  labs(#y = "Nitrogen content (%)",
-       x = "Treatment") +
+  # labs(y = "Nitrogen content (%)",
+  #      x = "Treatment") +
   scale_fill_manual(values = plot_colors) +
   scale_y_continuous(expand = c(0, 0), limits = c(0.75, 2.505)) +
   theme(axis.text.x = ggtext::element_markdown(color = "black", angle = 22.5, hjust = 1, vjust = 1),
         axis.text.y = element_text(color = "black"),
         axis.title.y = element_blank(),
+        axis.title.x = element_blank(),
         axis.title = element_text(color = "black", face = "bold"),
+        strip.text = element_text(color = "black", face = "bold"),
         panel.grid = element_blank())
 
 plant_cn_plot
