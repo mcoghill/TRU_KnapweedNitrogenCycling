@@ -25,13 +25,20 @@ list_df <- path %>%
   list_rbind(names_to = "id") %>% 
   select(Sample,id, total_genecopy) %>% 
   mutate(
+    id = case_when(
+      id == "AOB" ~ "AOB-amoA",
+      id == "AOA" ~ "AOA-amoA",
+      .default = as.character(id)
+    )
+  )  %>% 
+  mutate(
     treatment = str_extract(Sample, pattern = "[A-z]"),
     treatment = case_when(
-     treatment == "C" ~ "Control",
-     treatment == "K" ~ "*C. stoebe*",
-     treatment == "Y" ~ "*A. millefolium*",
-     treatment == "V" ~ "*V. villosa*",
-     .default = NA
+      treatment == "C" ~ "Control",
+      treatment == "K" ~ "*C. stoebe*",
+      treatment == "Y" ~ "*A. millefolium*",
+      treatment == "V" ~ "*V. villosa*",
+      .default = NA
     ),
     treatment = factor(
       treatment, 
@@ -40,9 +47,10 @@ list_df <- path %>%
     log_gene = log(total_genecopy),
     id = factor(
       id, 
-      levels = c("nifH", "AOB", "AOA", "narG", "nirK", "nirS", "nosZ")
+      levels = c("nifH", "AOB-amoA", "AOA-amoA", "narG", "nirK", "nirS", "nosZ")
     )
-  )
+  ) 
+
 
 gene_plot <- ggplot(list_df, aes(x = treatment, y = log_gene, fill = treatment)) +
   geom_violin(alpha = 1/3, width = 0.9, show.legend = T, linewidth = 0.25) +
@@ -62,8 +70,8 @@ gene_plot <- ggplot(list_df, aes(x = treatment, y = log_gene, fill = treatment))
   facetted_pos_scales(
     y = list(
       id == "nifH" ~ scale_y_continuous(limits = c(NA,20)),
-      id == "AOB" ~ scale_y_continuous(limits = c(NA,16.1)),
-      id == "AOA" ~ scale_y_continuous(limits = c(NA,18)),
+      id == "AOB-amoA" ~ scale_y_continuous(limits = c(NA,16.1)),
+      id == "AOA-amoA" ~ scale_y_continuous(limits = c(NA,18)),
       id == "narG"  ~ scale_y_continuous(limits = c(NA,19.5)),
       id == "nirK"  ~ scale_y_continuous(limits = c(NA,20.1)),
       id == "nirS"  ~ scale_y_continuous(limits = c(NA,20.5)),
