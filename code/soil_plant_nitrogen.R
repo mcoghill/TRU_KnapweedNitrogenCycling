@@ -45,7 +45,7 @@ soil_cn_plot <- ggplot(df_soil, aes(x = treatment, y = nitrogen, fill = treatmen
   facet_grid(. ~ title) +
   theme_bw(base_size = 14, base_family = font_style) +
   scale_fill_manual(values = plot_colors) +
-  labs(y = "Nitrogen content (%)") +
+  labs(y = "Total Nitrogen content (%)") +
   theme(axis.text.x = ggtext::element_markdown(color = "black", angle = 22.5, hjust = 1, vjust = 1),
         axis.text.y = element_text(color = "black"),
         axis.title = element_text(color = "black", face = "bold"),
