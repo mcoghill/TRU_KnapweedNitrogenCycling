@@ -166,28 +166,29 @@ mod
 #figures for model md3.1
 plt_n1 <- ggplot(all_data, aes(x = cn_ratio, y = mean_n)) +
   geom_smooth(method = "lm", color = "black") +
-  geom_point(pch = 21, fill= "#414487AA", size = 5, color = "black") +
-  theme_bw(base_size = 18, base_family = font_style) +
+  geom_point(pch = 21, fill= "#414487AA", size = 3, color = "black") +
+  theme_bw(base_size = 12, base_family = font_style) +
   # coord_cartesian(xlim = c(11.4, 12.1))+
   annotate(geom = "text",
            x = -Inf,
            y = -Inf,
            label = glue("{'  '}F = {round(summ_md3.1$statistic[1],2)}\n{'  '}p = {round(summ_md3.1$p.value[1], 4)}"),
            hjust = 0, vjust = -0.3,
-           size = 6,
+           lineheight = 0.8,
+           size = 4,
            fontface = "italic") +
   annotate(geom = "text",
            x = -Inf,
            y = Inf,
            label = "A",
            hjust = 4, vjust = 1,
-           size = 6,
            fontface = "bold") +
   theme(axis.text = element_text(color = "black"),
         panel.grid = element_blank()) +
   labs(x = "Soil C/N ratio",
        y = "Plant nitrogen content (%)") +
-  coord_cartesian(expand = TRUE, xlim = c(11.377, NA), clip = "off")
+  coord_cartesian(expand = c(FALSE, TRUE, FALSE, TRUE), xlim = c(11.377, NA), ylim = c(0.7, 2.3), clip = "off") +
+  scale_y_continuous(breaks = c(0.7, 1, 1.3, 1.6, 1.9, 2.2))
 
 plt_n1
 # ggsave(plt_n1, file = "figures/plant_nitrogen_vs_cn_ratio.png", width = , height = 6, dpi = 800, units = "in")
@@ -195,29 +196,31 @@ plt_n1
 
 plt_n2 <- ggplot(all_data, aes(x = `AOA-amoA`, y = mean_n )) +
   geom_smooth(method = "lm", color = "black") +
-  geom_point(pch = 21, fill= "#414487AA", size = 5, color = "black") +
-  theme_bw(base_size = 18, base_family = font_style) +
+  geom_point(pch = 21, fill= "#414487AA", size = 3, color = "black") +
+  theme_bw(base_size = 12, base_family = font_style) +
   # coord_cartesian(xlim = c(16.6, 17.75))+
   annotate(geom = "text",
            x = Inf,
            y = -Inf,
            label = glue("F = {round(summ_md3.1$statistic[3],2)}  \np = {round(summ_md3.1$p.value[3], 4)}  "),
            hjust = 1, vjust = -0.3,
-           size = 6,
+           lineheight = 0.8,
+           size = 4,
            fontface = "italic") +
   annotate(geom = "text",
            x = -Inf,
            y = Inf,
            label = "B",
            hjust = 4, vjust = 1,
-           size = 6,
            fontface = "bold") +
   theme(axis.text = element_text(color = "black"),
         axis.title.x = element_text(face = "italic"),
         panel.grid = element_blank()) +
   labs(x = "AOA-amoA",
        y = "Plant nitrogen content (%)") +
-  coord_cartesian(expand = TRUE, clip = "off")
+  coord_cartesian(expand = c(FALSE, TRUE, FALSE, TRUE), ylim = c(0.7, 2.3), clip = "off") +
+  scale_y_continuous(breaks = c(0.7, 1, 1.3, 1.6, 1.9, 2.2)) +
+  scale_x_continuous(breaks = c(16.75, 17, 17.25, 17.5))
 
 plt_n2
 # ggsave(plt_n2, file = "figures/plant_nitrogen_vs_aoa.png", width = , height = 6, dpi = 800, units = "in")
@@ -225,29 +228,30 @@ plt_n2
 
 plt_n3 <- ggplot(all_data, aes(x = `AOB-amoA`, y = mean_n )) +
   geom_smooth(method = "lm", color = "black") +
-  geom_point(pch = 21, fill= "#414487AA", size = 5, color = "black") +
-  theme_bw(base_size = 18, base_family = font_style) +
+  geom_point(pch = 21, fill= "#414487AA", size = 3, color = "black") +
+  theme_bw(base_size = 12, base_family = font_style) +
   # coord_cartesian(xlim = c(12.75, 15.25))+
   annotate(geom = "text",
            x = Inf,
            y = -Inf,
            label = glue("F = {round(summ_md3.1$statistic[4],2)}  \np = {round(summ_md3.1$p.value[4], 3)}  "),
            hjust = 1, vjust = -0.3,
-           size = 6,
+           lineheight = 0.8,
+           size = 4,
            fontface = "italic") +
   annotate(geom = "text",
            x = -Inf,
            y = Inf,
            label = "C",
            hjust = 4, vjust = 1,
-           size = 6,
            fontface = "bold") +
   theme(axis.text = element_text(color = "black"),
         axis.title.x = element_text(face = "italic"),
         panel.grid = element_blank()) +
   labs(x = "AOB-amoA",
        y = "Plant nitrogen content (%)") +
-  coord_cartesian(expand = TRUE, clip = "off")
+  coord_cartesian(expand = c(FALSE, TRUE, FALSE, TRUE), ylim = c(0.7, 2.3), clip = "off") +
+  scale_y_continuous(breaks = c(0.7, 1, 1.3, 1.6, 1.9, 2.2))
 
 plt_n3
 # ggsave(plt_n3, file = "figures/plant_nitrogen_vs_aob.png", width = , height = 6, dpi = 800, units = "in")
@@ -255,29 +259,30 @@ plt_n3
 
 plt_n4 <- ggplot(all_data, aes(x = nirK, y = mean_n )) +
   geom_smooth(method = "lm", color = "black") +
-  geom_point(pch = 21, fill= "#414487AA", size = 5, color = "black") +
-  theme_bw(base_size = 18, base_family = font_style) +
+  geom_point(pch = 21, fill= "#414487AA", size = 3, color = "black") +
+  theme_bw(base_size = 12, base_family = font_style) +
   # coord_cartesian(xlim = c(18.25, 19.55))+
   annotate(geom = "text",
            x = -Inf,
            y = -Inf,
            label = glue("{'  '}F = {round(summ_md3.1$statistic[6],2)}\n{'  '}p = {round(summ_md3.1$p.value[6], 3)}"),
            hjust = 0, vjust = -0.3,
-           size = 6,
+           lineheight = 0.8,
+           size = 4,
            fontface = "italic") +
   annotate(geom = "text",
            x = -Inf,
            y = Inf,
            label = "D",
            hjust = 4, vjust = 1,
-           size = 6,
            fontface = "bold") +
   theme(axis.text = element_text(color = "black"),
         axis.title.x = element_text(face = "italic"),
         panel.grid = element_blank()) +
   labs(x = "nirK",
        y = "Plant nitrogen content (%)") +
-  coord_cartesian(expand = TRUE, clip = "off")
+  coord_cartesian(expand = c(FALSE, TRUE, FALSE, TRUE), ylim = c(0.7, 2.3), clip = "off") +
+  scale_y_continuous(breaks = c(0.7, 1, 1.3, 1.6, 1.9, 2.2))
 
 plt_n4
 # ggsave(plt_n4, file = "figures/plant_nitrogen_vs_nirK.png", width = , height = 6, dpi = 800, units = "in")
@@ -285,29 +290,30 @@ plt_n4
 
 plt_n5 <- ggplot(all_data, aes(x = nosZ, y = mean_n )) +
   geom_smooth(method = "lm", color = "black") +
-  geom_point(pch = 21, fill= "#414487AA", size = 5, color = "black") +
-  theme_bw(base_size = 18, base_family = font_style) +
+  geom_point(pch = 21, fill= "#414487AA", size = 3, color = "black") +
+  theme_bw(base_size = 12, base_family = font_style) +
   # coord_cartesian(xlim = c(18, 19.25))+
   annotate(geom = "text",
            x = Inf,
            y = -Inf,
            label = glue("F = {round(summ_md3.1$statistic[8],2)}  \np = {round(summ_md3.1$p.value[8], 3)}  "),
            hjust = 1, vjust = -0.3,
-           size = 6,
+           lineheight = 0.8,
+           size = 4,
            fontface = "italic") +
   annotate(geom = "text",
            x = -Inf,
            y = Inf,
            label = "E",
            hjust = 4.5, vjust = 1,
-           size = 6,
            fontface = "bold") +
   theme(axis.text = element_text(color = "black"),
         axis.title.x = element_text(face = "italic"),
         panel.grid = element_blank()) +
   labs(x = "nosZ",
        y = "Plant nitrogen content (%)") +
-  coord_cartesian(expand = TRUE, clip = "off")
+  coord_cartesian(expand = c(FALSE, TRUE, FALSE, TRUE), ylim = c(0.7, 2.3), clip = "off") +
+  scale_y_continuous(breaks = c(0.7, 1, 1.3, 1.6, 1.9, 2.2))
 
 plt_n5
 # ggsave(plt_n5, file = "figures/plant_nitrogen_vs_nosZ.png", width = , height = 6, dpi = 800, units = "in")
@@ -315,29 +321,30 @@ plt_n5
 
 plt_n6 <- ggplot(all_data, aes(x = lap, y = mean_n )) +
   geom_smooth(method = "lm", color = "black") +
-  geom_point(pch = 21, fill= "#414487AA", size = 5, color = "black") +
-  theme_bw(base_size = 18, base_family = font_style) +
+  geom_point(pch = 21, fill= "#414487AA", size = 3, color = "black") +
+  theme_bw(base_size = 12, base_family = font_style) +
   # coord_cartesian(xlim = c(90, 142))+
   annotate(geom = "text",
            x = Inf,
            y = -Inf,
            label = glue("F = {round(summ_md3.1$statistic[9],2)}  \np = {round(summ_md3.1$p.value[9], 3)}  "),
            hjust = 1, vjust = -0.3,
-           size = 6,
+           lineheight = 0.8,
+           size = 4,
            fontface = "italic") +
   annotate(geom = "text",
            x = -Inf,
            y = Inf,
            label = "F",
            hjust = 4.6, vjust = 1,
-           size = 6,
            fontface = "bold") +
   theme(axis.text = element_text(color = "black"),
         # plot.margin = unit(c(0, 0, 0, 0), "cm"),
         panel.grid = element_blank()) +
   labs(x = "Leucine-aminopeptidase",
        y = "Plant nitrogen content (%)") +
-  coord_cartesian(expand = TRUE, xlim = c(91.193, NA), clip = "off")
+  coord_cartesian(expand = c(FALSE, TRUE, FALSE, TRUE), ylim = c(0.7, 2.3), xlim = c(91.193, NA), clip = "off") +
+  scale_y_continuous(breaks = c(0.7, 1, 1.3, 1.6, 1.9, 2.2))
 
 plt_n6
 # ggsave(plt_n6, file = "figures/plant_nitrogen_vs_lap.png", width = 12, height = 8, dpi = 800, units = "in")
@@ -350,7 +357,7 @@ plant_nitroplot <- gridExtra::arrangeGrob(plt_n1, plt_n2, plt_n3, plt_n4, plt_n5
 #                              labels = "AUTO")
 
 plant_nitroplot
-ggsave(plant_nitroplot, file = "figures/plant_nitroplot.jpg",
-       width = 16, height = 10, dpi = 800, units = "in")
+ggsave(plant_nitroplot, file = "figures/plant_nitroplot_samescale.jpg",
+       width = 9, height = 5.625, dpi = 800, units = "in")
 
 
