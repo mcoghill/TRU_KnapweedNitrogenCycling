@@ -8,13 +8,12 @@ font_style <- "Arial"
 if(!font_style %in% fonts()) {
   font_import(prompt = FALSE)
 }
-loadfonts()
 
-# plot_colors <- palette.colors(4, palette = "Dark2")
+
 plot_colors <- scale_fill_viridis_d(begin = 0.2, end = 0.8, alpha = 2/3)$palette(4)
 names(plot_colors) <- c("Control", "*C. stoebe*", "*A. millefolium*", "*V. villosa*")
 
-# Soil plot - filter to read just the first 9 samples, and plot with Wilcox
+
 # pairwise comparisons, specifically comparing to the control
 df_soil <- readxl::read_xlsx("data/combined_soil_CN.xlsx") %>% 
   clean_names() %>% 
@@ -56,7 +55,7 @@ soil_cn_plot <- ggplot(df_soil, aes(x = treatment, y = nitrogen, fill = treatmen
 soil_cn_plot
 ggsave("figures/soil_cn.png", soil_cn_plot, width = 4, height = 4, units = "in", dpi = 800)
 
-# Plant data - Same thing as soil data, except making the comparison against
+
 # knapweed since there is no control data for aboveground material
 df_plant_cn <- readxl::read_xlsx("data/combined_plant_biom.xlsx") %>% 
   clean_names() %>% 
@@ -94,8 +93,6 @@ plant_cn_plot <- ggplot(df_plant_cn, aes(x = plant_type, y = mean_n, fill = plan
   ) +
   facet_grid(. ~ title) +
   theme_bw(base_size = 14, base_family = font_style) +
-  # labs(y = "Nitrogen content (%)",
-  #      x = "Treatment") +
   scale_fill_manual(values = plot_colors) +
   scale_y_continuous(expand = c(0, 0), limits = c(0.75, 2.505)) +
   theme(axis.text.x = ggtext::element_markdown(color = "black", angle = 22.5, hjust = 1, vjust = 1),
