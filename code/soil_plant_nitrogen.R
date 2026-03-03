@@ -53,7 +53,7 @@ soil_cn_plot <- ggplot(df_soil, aes(x = treatment, y = nitrogen, fill = treatmen
         panel.grid = element_blank())
 
 soil_cn_plot
-ggsave("figures/soil_cn.png", soil_cn_plot, width = 4, height = 4, units = "in", dpi = 800)
+#ggsave("figures/soil_cn.png", soil_cn_plot, width = 4, height = 4, units = "in", dpi = 800)
 
 
 # knapweed since there is no control data for aboveground material
@@ -105,7 +105,7 @@ plant_cn_plot <- ggplot(df_plant_cn, aes(x = plant_type, y = mean_n, fill = plan
 
 plant_cn_plot
 
-ggsave("figures/plant_cn.png", plant_cn_plot, width = 4, height = 4, units = "in", dpi = 800)
+#ggsave("figures/plant_cn.png", plant_cn_plot, width = 4, height = 4, units = "in", dpi = 800)
 
 # Combine plots
 soil_plant_cn_plot <- soil_cn_plot + plant_cn_plot
