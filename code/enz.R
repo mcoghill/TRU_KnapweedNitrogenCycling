@@ -1,7 +1,7 @@
 library(tidyverse)
 library(ggpubr)
 library(extrafont)
-#library(vegan)
+
 
 font_style <- "Arial"
 if(!font_style %in% fonts()) {
@@ -9,7 +9,7 @@ if(!font_style %in% fonts()) {
 }
 loadfonts()
 
-# plot_colors <- palette.colors(4, palette = "Dark2")
+
 plot_colors <- scale_fill_viridis_d(begin = 0.2, end = 0.8, alpha = 2/3)$palette(4)
 names(plot_colors) <- c("Control", "*C. stoebe*", "*A. millefolium*", "*V. villosa*")
 
@@ -23,12 +23,16 @@ df <- readxl::read_xlsx("data/combined_enzyme.xlsx") %>%
       plant == "vetch" ~ "*V. villosa*",
       .default = str_to_sentence(plant)
     ),
-    plant = factor(plant, levels = c("Control", "*C. stoebe*", "*A. millefolium*", "*V. villosa*"))
+    plant = factor(plant, levels = c("Control", "*C. stoebe*", "*A. millefolium*", "*V. villosa*")),
+    cn_enz_ratio = log(cb + ag)/log(lap + nag),
+    cp_enz_ratio = log(cb + ag)/log(phos),
+    np_enz_ratio = log(lap + nag)/log(phos),
+    vec_length = sqrt((cn_enz_ratio)^2 + (cp_enz_ratio)^2),
+    vec_ang = (atan2( cn_enz_ratio, cp_enz_ratio)*(180/pi))
   )
 
 
 df_long <- df %>% 
-# mutate(nitro_enz = (lap + nag)) %>% 
   pivot_longer(-c(plant, rep)) %>% 
   filter(name %in% c("lap", "nag")) %>% 
   mutate(value = value/1000) ## values changed from nanomole/g/hr to micromole/g/hr
@@ -63,4 +67,5 @@ ggplot(df_long , aes(x = plant, y = value, fill = plant)) +
       x = NULL) 
 plt
 ggsave(plt, file = "figures/enz_activity.png", width = 7.5, height = 5, dpi = 800, units = "in")
+
 
