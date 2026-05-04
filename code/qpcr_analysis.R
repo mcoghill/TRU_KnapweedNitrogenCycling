@@ -90,7 +90,8 @@ gene_plot <- ggplot(list_df, aes(x = treatment, y = log_gene, fill = treatment))
         axis.title.y = element_text(color = "black", face = "bold"),
         panel.grid = element_blank()) +
   guides(fill=guide_legend(nrow=2,byrow=TRUE)) +
-  labs(y = "Log (gene)")
+  ylab(bquote('Log '(paste(`gene copy number g`^-1, "dry soil"))))
+  # labs(y = "Log (gene)")
 
 gene_plot
 
